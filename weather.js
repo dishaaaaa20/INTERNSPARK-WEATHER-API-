@@ -15,28 +15,31 @@ const time = document.getElementById("time");
 
 const weatherIcon = document.getElementById("weatherIcon");
 
-const apiKey = "https://api.weatherapi.com/v1/current.json?key=YOURKEY&q=Delhi";
+const apiKey = "fa2c4975b18249b29ed152318262705";
 
 async function getWeather(city) {
 
+  loading.style.display = "block";
+  error.textContent = "";
+
   try {
 
-    loading.style.display = "block";
-    error.textContent = "";
-    weatherCard.style.display = "none";
-
     const response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`
+      `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`
     );
-
-    if (!response.ok) {
-      throw new Error("City not found");
-    }
 
     const data = await response.json();
 
+    console.log(data);
+
+    if (data.error) {
+      error.textContent = data.error.message;
+      loading.style.display = "none";
+      return;
+    }
+
     cityName.textContent =
-      `${data.location.name}, ${data.location.region}, ${data.location.country}`;
+      `${data.location.name}, ${data.location.country}`;
 
     temperature.textContent =
       `🌡 Temperature: ${data.current.temp_c}°C`;
@@ -53,42 +56,23 @@ async function getWeather(city) {
     time.textContent =
       `🕒 Local Time: ${data.location.localtime}`;
 
-    weatherIcon.src = data.current.condition.icon;
+    weatherIcon.src =
+      "https:" + data.current.condition.icon;
 
-    // Dynamic background
-    const weatherCondition = data.current.condition.text;
-
-    if (weatherCondition.includes("Sunny")) {
-      document.body.style.background =
-        "linear-gradient(to right, #f6d365, #fda085)";
-    }
-
-    else if (weatherCondition.includes("Cloud")) {
-      document.body.style.background =
-        "linear-gradient(to right, #bdc3c7, #2c3e50)";
-    }
-
-    else if (weatherCondition.includes("Rain")) {
-      document.body.style.background =
-        "linear-gradient(to right, #4facfe, #00f2fe)";
-    }
-
-    else {
-      document.body.style.background =
-        "linear-gradient(to right, #74ebd5, #9face6)";
-    }
-
-    loading.style.display = "none";
     weatherCard.style.display = "block";
 
   }
 
   catch (err) {
 
-    loading.style.display = "none";
-    error.textContent = err.message;
+    error.textContent = "Something went wrong";
+
+    console.log(err);
 
   }
+
+  loading.style.display = "none";
+
 }
 
 searchBtn.addEventListener("click", () => {
@@ -101,10 +85,9 @@ searchBtn.addEventListener("click", () => {
 
 });
 
-// Press Enter to Search
-cityInput.addEventListener("keypress", (event) => {
+cityInput.addEventListener("keypress", (e) => {
 
-  if (event.key === "Enter") {
+  if (e.key === "Enter") {
 
     getWeather(cityInput.value);
 
