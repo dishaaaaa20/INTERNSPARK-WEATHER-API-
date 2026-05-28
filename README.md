@@ -59,6 +59,10 @@ Weather-App/
 - Dynamic UI updates
 - Responsive frontend design
 
+## Note
+
+This project uses a public weather API for fetching real-time weather data.
+If GitHub Pages temporarily shows a browser warning, it may be due to browser caching or API request restrictions. The project itself only contains frontend HTML, CSS, and JavaScript files.
 ---
 
 ## 👨‍💻 Author
