@@ -49,6 +49,23 @@ Weather-App/
 ├── weather.js
 └── README.md
 
+## API Write-Up
+
+This project uses the WeatherAPI public REST API to fetch real-time weather information dynamically.
+
+The API provides:
+- Temperature
+- Weather condition
+- Humidity
+- Wind speed
+- Local time
+- Weather icons
+
+The Fetch API in JavaScript is used to send asynchronous requests and display the data dynamically on the webpage.
+
+API Used:
+https://www.weatherapi.com/
+
 ## 📚 What I Learned
 
 - Working with REST APIs
