@@ -15,7 +15,7 @@ const time = document.getElementById("time");
 
 const weatherIcon = document.getElementById("weatherIcon");
 
-const apiKey = "fa2c4975b18249b29ed152318262705";
+const apiKey = "https://api.weatherapi.com/v1/current.json?key=YOURKEY&q=Delhi";
 
 async function getWeather(city) {
 
