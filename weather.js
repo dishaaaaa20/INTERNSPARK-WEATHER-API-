@@ -15,7 +15,7 @@ const time = document.getElementById("time");
 
 const weatherIcon = document.getElementById("weatherIcon");
 
-const apiKey = "your_real_key"";
+const apiKey = "fa2c4975b18249b29ed152318262705";
 
 async function getWeather(city) {
 
